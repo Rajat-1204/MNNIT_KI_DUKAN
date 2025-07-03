@@ -19,7 +19,7 @@ var gateway = new braintree.BraintreeGateway({
 
 export const createProductController = async (req, res) => {
     try {
-        const { name, description, price, category, quantity, shipping } =
+        const { name, description, price, address, category, quantity, shipping } =
             req.fields;
         const { photo } = req.files;
         //alidation
@@ -28,6 +28,8 @@ export const createProductController = async (req, res) => {
                 return res.status(500).send({ error: "Name is Required" });
             case !description:
                 return res.status(500).send({ error: "Description is Required" });
+            case !address:
+                return res.status(500).send({ error: "Address is Required" });    
             case !price:
                 return res.status(500).send({ error: "Price is Required" });
             case !category:
